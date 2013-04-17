@@ -1,14 +1,4 @@
 <?php
-/* -------------------- Update Notifications Notice -------------------- */
-if ( !function_exists( 'wdp_un_check' ) ) {
-  add_action( 'admin_notices', 'wdp_un_check', 5 );
-  add_action( 'network_admin_notices', 'wdp_un_check', 5 );
-  function wdp_un_check() {
-    if ( !class_exists( 'WPMUDEV_Update_Notifications' ) && current_user_can( 'edit_users' ) )
-      echo '<div class="error fade"><p>' . __('Please install the latest version of <a href="http://premium.wpmudev.org/project/update-notifications/" title="Download Now &raquo;">our free Update Notifications plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/">More information &raquo;</a>', 'wpmudev') . '</a></p></div>';
-  }
-}
-/* --------------------------------------------------------------------- */
 
 function set_popover_url($base) {
 
@@ -136,6 +126,7 @@ function P_style_urls( $styles = array() ) {
 
 	$styles['Default'] = popover_url('popoverincludes/css/default');
 	$styles['Default Fixed'] = popover_url('popoverincludes/css/fixed');
+	$styles['Dark Background Fixed'] = popover_url('popoverincludes/css/fullbackground');
 
 	return $styles;
 }
@@ -144,6 +135,7 @@ add_filter( 'popover_available_styles_url', 'P_style_urls');
 function P_style_dirs() {
 	$styles['Default'] = popover_dir('popoverincludes/css/default');
 	$styles['Default Fixed'] = popover_dir('popoverincludes/css/fixed');
+	$styles['Dark Background Fixed'] = popover_dir('popoverincludes/css/fullbackground');
 
 	return $styles;
 }
@@ -404,6 +396,36 @@ function P_CountryList() {
 	);
 
 	return apply_filters( 'popover_country_list', $countries );
+
+}
+
+function get_popover_option($key, $default = false) {
+
+	if(is_multisite() && function_exists('is_plugin_active_for_network') && is_plugin_active_for_network('wordpress-popup/popover.php')) {
+		return get_site_option($key, $default);
+	} else {
+		return get_option($key, $default);
+	}
+
+}
+
+function update_popover_option($key, $value) {
+
+	if(is_multisite() && function_exists('is_plugin_active_for_network') && is_plugin_active_for_network('wordpress-popup/popover.php')) {
+		return update_site_option($key, $value);
+	} else {
+		return update_option($key, $value);
+	}
+
+}
+
+function delete_popover_option($key) {
+
+	if(is_multisite() && function_exists('is_plugin_active_for_network') && is_plugin_active_for_network('wordpress-popup/popover.php')) {
+		return delete_site_option($key);
+	} else {
+		return delete_option($key);
+	}
 
 }
 
