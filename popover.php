@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: WordPress PopUp Plugin
+Plugin Name: WordPress Pop Up Plugin
 Plugin URI: http://premium.wpmudev.org
-Description: Allows you to display a fancy popup (powered as a popover!) to visitors sitewide or per blog, a *very* effective way of advertising a mailing list, special offer or running a plain old ad.
+Description: Allows you to display a fancy pop up to visitors sitewide or per blog, a *very* effective way of advertising a mailing list, special offer or running a plain old ad.
 Author: Barry (Incsub)
-Version: 4.4.5
+Version: 4.4.5.1
 Author URI: http://premium.wpmudev.org
 WDP ID: 123
 
